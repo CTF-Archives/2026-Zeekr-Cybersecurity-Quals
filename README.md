@@ -44,10 +44,8 @@ Hint:
 > 对每页：
 > share = bytes(a ^ b for a, b in zip(page[0:32], mask_for(page_id, order)))
 > 五个解掩码后的份额逐字节异或得到
-
 > sha256(canonical.encode() + manifest_secret).hexdigest()
-
-XXXXXXXXXXXXXXXX
+> XXXXXXXXXXXXXXXX
 
 ### Delta Forge
 
