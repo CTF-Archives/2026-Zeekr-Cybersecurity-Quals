@@ -14,6 +14,10 @@ Hint:
 > - 右上校准点为空心；
 > - `PARITY` 点等于所有数据点的异或。
 
+> 其 ASCII 后直接拼接 16 字节密钥：
+> ascii("ops_shadow|xxxxxx|xxxxxx")
+> || bytes.fromhex("xxxxxxxxxxxxxxxx")
+
 ### CAN Noir
 
 > 一把无钥匙进入钥匙的配置区已被返修时擦除，只剩下 PCB 返修照片、厂商色卡和一段总线记录。记录里有 8 次已接受的解锁帧，但下一帧没有捕获。flag格式GEELY{CAN_<sha256前16位>_<sha256后16位>}
@@ -34,6 +38,14 @@ Hint:
 ### ROM Mosaic
 
 > 安全启动载体被切成十六个 0x200 字节页。真正参与 secure manifest 的页少之又少；其余页是旧版本、损坏页或诱饵页。GEELY{sha256_hex}
+
+Hint:
+
+> 对每页：
+> share = bytes(a ^ b for a, b in zip(page[0:32], mask_for(page_id, order)))
+> 五个解掩码后的份额逐字节异或得到
+
+XXXXXXXXXXXXXXXX
 
 ### Delta Forge
 
